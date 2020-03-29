@@ -20,8 +20,8 @@ Write a function that appends ' The end.' to a string, and returns the modified 
 
 const appendTheEnd = (str) => {
   // Solution code here...
-    let hi = str + 'The end.';
-
+    let newStr = `${str} The end.`;
+    return(newStr);
     return hi;
 };
 
