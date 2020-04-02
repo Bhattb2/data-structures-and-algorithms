@@ -97,9 +97,11 @@ Here is an example of the input:
 ];
 ------------------------------------------------------------------------------------------------ */
 
-const sortByPrice = (arr) => {
+const sortByPrice = (objarr) => {
   // Solution code here...
+ 
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
@@ -111,6 +113,7 @@ For example, [1, 14, 0.2, -281, 54782] is only correctly sorted in that order.
 
 const sortNumbersByLength = (arr) => {
   // Solution code here...
+  
 };
 
 /*-----------------------------------------------------------------------------------------------
@@ -131,9 +134,11 @@ const people = [
   new Person('Stan', 'Seattle', 67),
 ];
 
-const sortPeople = (arr) => {
+const sortPeople = (Objarr) => {
   // Solution code here...
-};
+
+  };
+  
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 8
@@ -145,9 +150,11 @@ If two people share the same last name, alphabetize on their first name.
 If two people have the same full name, the younger one should come first. Do not worry about capitalization.
 ------------------------------------------------------------------------------------------------ */
 
-const sortPeopleBetter = (arr) => {
+const sortPeopleBetter = (Objarr) => {
   // Solution code here...
+ 
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 9 - Stretch Goal
