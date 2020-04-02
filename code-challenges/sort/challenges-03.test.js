@@ -97,9 +97,16 @@ Here is an example of the input:
 ];
 ------------------------------------------------------------------------------------------------ */
 
-const sortByPrice = (arr) => {
+const sortByPrice = (objarr) => {
   // Solution code here...
+  objarr.sort((a,b) => {
+    if (a.price > b.price) {return 1;}
+    else if (a.price < b.price) {return -1;}
+    else {return 0;}
+  });
+  return objarr;
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
@@ -111,6 +118,17 @@ For example, [1, 14, 0.2, -281, 54782] is only correctly sorted in that order.
 
 const sortNumbersByLength = (arr) => {
   // Solution code here...
+  arr.sort((a, b) => {
+    if (a.toString().length < b.toString().length) {
+      return -1;
+    } else if (a.toString().length > b.toString().length) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+
+  return arr;
 };
 
 /*-----------------------------------------------------------------------------------------------
@@ -131,9 +149,11 @@ const people = [
   new Person('Stan', 'Seattle', 67),
 ];
 
-const sortPeople = (arr) => {
+const sortPeople = (Objarr) => {
   // Solution code here...
-};
+
+  };
+  
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 8
@@ -145,9 +165,11 @@ If two people share the same last name, alphabetize on their first name.
 If two people have the same full name, the younger one should come first. Do not worry about capitalization.
 ------------------------------------------------------------------------------------------------ */
 
-const sortPeopleBetter = (arr) => {
+const sortPeopleBetter = (Objarr) => {
   // Solution code here...
+ 
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 9 - Stretch Goal
@@ -238,7 +260,7 @@ describe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should sort items by their price', () => {
     expect(sortByPrice([
       {name: 'Sweatshirt', price: 45},
@@ -254,7 +276,7 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should sort numbers by their length', () => {
     expect(sortNumbersByLength([10, 2.8, 1, -47.75])).toStrictEqual([1, 10, 2.8, -47.75]);
     expect(sortNumbersByLength([100, 2.82, 1, -47.75])).toStrictEqual([1, 100, 2.82, -47.75]);
