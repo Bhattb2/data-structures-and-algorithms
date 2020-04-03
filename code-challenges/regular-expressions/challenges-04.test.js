@@ -46,6 +46,14 @@ Write a function named citiesAtoJ that takes in an array of city names and uses 
 
 const citiesAtoJ = (arr) => {
   // Solution code here...
+  let newArr = [];
+  arr.forEach((city) => {
+    let regex = /^[A-J]\w*/gm;
+    if (regex.test(city)) {
+      newArr.push(city);
+    }
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -60,8 +68,31 @@ If the user enters any of these four inputs, return true. For any other input, r
 Do not use the vertical bar (pipe) in your pattern.
 ------------------------------------------------------------------------------------------------ */
 
+// describe('Testing challenge 4', () => {
+//   test('It should match any of the acceptable inputs', () => {
+//     expect(matchMonth('Oct')).toBeTruthy();
+//     expect(matchMonth('oct')).toBeTruthy();
+//     expect(matchMonth('October')).toBeTruthy();
+//     expect(matchMonth('october')).toBeTruthy();
+//   });
+
+//   test('It should not match anything other than the acceptable inputs', () => {
+//     expect(matchMonth('November')).toBeFalsy();
+//     expect(matchMonth('nov')).toBeFalsy();
+//     expect(matchMonth(123)).toBeFalsy();
+//     expect(matchMonth('octob')).toBeFalsy();
+//     expect(matchMonth('OCTOBER')).toBeFalsy();
+//     expect(matchMonth('notOctober')).toBeFalsy();
+//   });
+// });
+
 const matchMonth = (input) => {
-  // Solution code here...
+  let regex = /^[Oo]ct(ober)*$/gm;
+  if (regex.test(input)) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -76,6 +107,8 @@ The expected output of "Hello, and have a wonderful day!" is ["and ", "have ", "
 
 const noPunctuation = str => {
   // Solution code here...
+  let regex = /\b\w*\s/gm;
+  return str.match(regex);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -92,6 +125,9 @@ For example, 'Welcome to Code 301!' will return 'W_lc_m_ t_ C_d_ 301!'.
 
 let hangman = (str) => {
   // Solution code here...
+  let hangman = (str) => {
+    let regex = /[a,e,i,o,u]/gmi;
+  return str.replace(regex, '_');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -148,7 +184,7 @@ describe('Testing challenge 2', () => {
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   let cities = ['Cleveland', 'San Diego', 'Birmingham', 'Seattle', 'Miami', 'New York City', 'Omaha', 'Portland', 'Austin', 'Boston', 'Newport Beach', 'Hoboken'];
 
   test('It should return the cities whose names begin with the letters A through J', () => {
@@ -164,7 +200,7 @@ xdescribe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should match any of the acceptable inputs', () => {
     expect(matchMonth('Oct')).toBeTruthy();
     expect(matchMonth('oct')).toBeTruthy();
@@ -182,7 +218,7 @@ xdescribe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia vel massa sed egestas. Nunc faucibus iaculis elit, a scelerisque enim condimentum sed. Aenean ac scelerisque sem, et pharetra diam.';
 
   test('It should only return words that are immediately followed by a space', () => {
@@ -196,7 +232,7 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   let startString = 'This is a regex challenge. We are trying to create a hangman phrase where all of the vowels are missing!';
 
   test('It should remove the vowels from the hangman string and replace them with underscores', () => {
