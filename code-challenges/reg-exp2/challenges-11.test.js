@@ -10,9 +10,9 @@ If the PIN is four numerical digits long, return true. Otherwise, return false.
 
 const validatePin = (pin) => {
   // Solution code here...
-  let regEx = /\b^\d{4}\b/;
-  return regEx.test(pin);
-}
+  const regex = (/^[0-9]{4}$/);
+  return regex.test(pin);
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -32,6 +32,9 @@ Note: if you ever need to validate an email using a regex in practice, the Inter
 
 const validateEmail = (email) => {
   // Solution code here...
+  let regex = /^[a-z]+(\.[a-z]+)?@[a-z]+\.(com|net|org)$/gm;
+  return regex.test(email);
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -57,6 +60,9 @@ Return either true or false.
 
 const validatePhoneNumber = (phoneNumber) => {
   // Solution code here...
+  let regEx = /^[(]?\d{3}[)]?(-\d{3}-|\s\d{3}-|-\d{3}\s|-\d{3}\s|\s\d{3}\s|\d{3}|\s\d{3}|\d{3}-|-\d{3}|\d{3}\s)\d{3}[^2]$/;
+  return regEx.test(phoneNumber);
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -82,7 +88,7 @@ DO NOT CHANGE any of the below code.
 Run your tests from the console: jest solutions-11.test.js
 ------------------------------------------------------------------------------------------------ */
 
-xdescribe('Testing challenge 1', () => {
+describe('Testing challenge 1', () => {
   test('It should validate a PIN of exactly four digits', () => {
     expect(validatePin(1234)).toBeTruthy();
     expect(validatePin(123)).toBeFalsy();
@@ -95,7 +101,7 @@ xdescribe('Testing challenge 1', () => {
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should match a basic email', () => {
     expect(validateEmail('joe@codefellows.com')).toBeTruthy();
   });
@@ -125,7 +131,7 @@ xdescribe('Testing challenge 2', () => {
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should match the acceptable phone number formats', () => {
     expect(validatePhoneNumber('(555) 555-5555')).toBeTruthy();
     expect(validatePhoneNumber('555 555-5555')).toBeTruthy();
