@@ -23,17 +23,17 @@ const alkiBeach = [33, 31, 147, 130, 27, 93, 38, 126, 141, 63, 46, 17];
 const cookieStores = [firstPike, seaTac, seattleCenter, capHill, alkiBeach];
 
 const grandTotal = (stores) => {
-  // Solution code here...
-  let columnTotal = new Array(firstPike.length).fill(0);
-  for(let i = 0; i <= stores.length-1; i++){
-    for(let j = 0; j <= stores[i].length-1; j++) {
-      let value = stores[i][j];
-      columnTotal[j] += value;
+  let totalPerHourArr = [];
+  for (let hour = 0; hour < hoursOpen.length; hour++) {
+    let sumPerHour = 0;
+    for (let store = 0; store < stores.length; store++) {
+      sumPerHour = sumPerHour + stores[store][hour];
     }
+    totalPerHourArr.push(sumPerHour);
   }
-  return columnTotal;
-
+  return totalPerHourArr;
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -47,6 +47,14 @@ Write a function named salesData that uses forEach to iterate over the hourlySal
 
 const salesData = (hours, data) => {
   // Solution code here...
+  let objectArr = [];
+  data.forEach((value, index) => {
+    objectArr.push({
+      sales: `${value} cookies`,
+      time: hours[index],
+    });
+  });
+  return objectArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -69,6 +77,13 @@ const errands = [
 
 const howManyTreats = (arr) => {
   // Solution code here...
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].items.length; j++) {
+      if (arr[i].items[j].name === 'Treats') {
+        return arr[i].items[j].quantity;
+      }
+    }
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -91,6 +106,7 @@ The top row of the board is considered row zero and row numbers increase as they
 
 const battleship = (board, row, col) => {
   //  Solution code here...
+  if (board[row][col] === '#') {return 'hit'} else { return 'miss'};
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -103,6 +119,12 @@ For example, the following input returns a product of 720: [[1,2], [3,4], [5,6]]
 
 const calculateProduct = (numbers) => {
   // Solution code here...
+  let product = 1;
+  numbers.map(arr => {
+    arr.map(num => {product = product*num;
+    })
+  })
+  return product;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -123,6 +145,15 @@ const weeklyTemperatures = [
 
 const averageDailyTemperature = (weather) => {
   // Solution code here...
+  let total = 0;
+  let temps = 0;
+  for (let i = 0; i < weather.length; i++) {
+    for (let j = 0; j < weather[i].length; j++) {
+      temps = temps + 1;
+      total = total + weather[i][j];
+    }
+  }
+  return total / temps;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -144,6 +175,22 @@ let lowestWeeklyTemperatureData = [
 
 const lowestWeeklyAverage = (weather) => {
   // Solution code here...
+  // create object with index number and placeholder for averages
+  // calculate averages for each array and then place in the objet within the array
+  // compare the results and find the index with the lowest number
+  let finalArray = [];
+  let count = 0;
+  weather.map(arr => {
+    count = arr.length;
+    let total = arr.reduce((accl, num, idx) => {
+      return accl += num;
+    }, 0);
+
+    finalArray.push(total/count);
+  }) 
+
+  finalArray.sort();
+  return finalArray[0];
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -202,13 +249,13 @@ describe('Testing challenge 2', () => {
 });
 
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should return the number 24', () => {
     expect(howManyTreats(errands)).toStrictEqual(24);
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   const battleshipData = [
     ['#', ' ', '#', ' '],
     ['#', ' ', '#', ' '],
@@ -227,7 +274,7 @@ xdescribe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should multiply all the numbers together', () => {
     expect(calculateProduct([[1,2], [3,4], [5,6]])).toStrictEqual(720);
   });
@@ -240,13 +287,13 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should calculate and return the average temperature of the data set', () => {
     expect(averageDailyTemperature(weeklyTemperatures)).toStrictEqual(60.25);
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should return the lowest weekly average temperature within the data set', () => {
     expect(lowestWeeklyAverage(weeklyTemperatures)).toStrictEqual(57);
     expect(lowestWeeklyAverage(lowestWeeklyTemperatureData)).toStrictEqual(46);
