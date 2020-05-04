@@ -10,6 +10,10 @@ For example, ['apple', 'banana', 'MacGyver'] returns ['Apple', 'Banana', 'MacGyv
 
 const toTitleCase = (arr) => {
   // Solution code here...
+  return arr.map(value => {
+    let newValue = value.charAt(0).toUpperCase()
+    return value.replace(value.charAt(0), newValue)
+  })
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -85,6 +89,13 @@ let starWarsData = [{
 
 let biggerThanLuke = (arr) => {
   // Solution code here...
+  const newArray = [];
+  arr.filter(obj => {
+    if (obj.mass > 77)
+    {newArray.push(obj.name);}
+  })
+  const newStr = newArray.join(' - ');
+  return newStr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -103,6 +114,14 @@ This data could be sorted by name or price.
 
 const sortBy = (property, arr) => {
   // Solution code here...
+  return arr.sort((a, b) => {
+    if (a[property] < b[property]) {
+      return -1;
+    } else if (a[property] > b[property]) {
+      return 1;
+    }
+    return 0;
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -119,6 +138,8 @@ https:/missingslash.org returns false because the URL is malformed
 ------------------------------------------------------------------------------------------------ */
 const isSecure = (url) => {
 // Solution code here...
+let regex =/https:\/\//
+return regex.test(url);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -155,7 +176,7 @@ Run your tests from the console: jest challenge-14.test.js
 
 ------------------------------------------------------------------------------------------------ */
 
-xdescribe('Testing challenge 1', () => {
+describe('Testing challenge 1', () => {
   test('It should convert each word to title case', () => {
     const words = ['apple', 'banana', 'MacGyver'];
     expect(toTitleCase(words)).toStrictEqual(['Apple','Banana','MacGyver']);
@@ -164,14 +185,14 @@ xdescribe('Testing challenge 1', () => {
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should return only characters that are bigger than Luke', () => {
     expect(biggerThanLuke(starWarsData)).toStrictEqual('Darth Vader - Pex Kylar');
     expect(biggerThanLuke([])).toStrictEqual('');
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should sort items by a price', () => {
 
     expect(sortBy('price', [
@@ -200,7 +221,7 @@ xdescribe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should check if url is https', () => {
 
     expect(isSecure('http://www.insecure.com')).toBe(false);
