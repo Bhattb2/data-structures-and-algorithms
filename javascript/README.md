@@ -2,94 +2,84 @@
 
 ## Language: `JavaScript`
 
-### Repository Setup
+### Folder and Challenge Setup
 
-- Each Data Structure should be implemented separately, in a properly named folder.
-  - i.e. `linked-lists`
-- The root file for the implementation is then to be named for the structure i.e. `linked-list.js`
-- Each implementation should have a tests folder, named `__tests__`
-  - Name the test file for your implementation with the name of the data structure with a `.test.js` extension
-    - i.e. `linked-lists.test.js`
-- For daily challenges:
-  - Each implementation should have a challenges folder, named `challenges`
-  - Within the challenges folder, a subfolder bearing the name of the challenge
-    - i.e. `remove-duplicates`
-  - Within the proper subfolder:
-    - A README.md that will house your challenge summary, whiteboard photos
-    - The js file that contains your challenge code
-    - A `__tests__` folder for the tests for the challenge
+Each type of code challenge has slightly different instructions. Please refer to the notes and examples below for instructions for each DS&A assignment type.
 
-The final structure should resemble this as you complete the course
+### Data Structure: New Implementation
 
-```bash
-  data-structures-and-algorithms
-  |
-  ├── code-challenges
-  │  └── challenge-01.test.js
-  │  └── challenge-02.test.js
-  │  └── ...
-  |
-  ├── javascript
-  │   └── linked-lists
-  │       └── linked-list.js
-  │       └── __tests__
-  │           └── linked-list.test.js
-  │           └── challenge-01-remove-duplicates.test.js
-  │       └── challenges
-  │           └── remove-duplicates
-  │               └── remove-duplicates.js
-  │               └── README.md
-  │               └── __tests__
-  │                   └── remove-duplicates.test.js
-  │           └── ...
-  │   └── binary-search-trees
-  │       └── index.js
-  │       └── __tests__
-  │           └── bst.test.js
-  │       └── challenges
-  │           └── fizzbuzz
-  │               └── fizzbuzz.js
-  │               └── README.md
-  │               └── __tests__
-  │                   └── fizzbuzz.test.js
-  │           └── ...
-  │   └── ...
-  |
-  ├── node_modules
-  |
-  ├── .github
-  │   └── workflows
-  │       └── javascript-tests.yml
-  │
-  ├── .eslintrc.json
-  ├── .gitignore
-  ├── package-lock.json
-  ├── package.json
-  └── README.md
-```
-
-### Challenge Execution and Testing
-
-- Each day, create a new challenge folder as directed for the data structure
-- Your challenge implementation must include a proper README along with any images of your whiteboard
-- As you implement the challenge and your tests, you should be able to use your base implementation
-  - i.e.
+- Create a new folder under the `javascript` level, with the name of the data structure and complete your implementation there
+  - i.e. `linked-list`
+- Implementation (the data structure "class")
+  - The implementation of the data structure must be named `index.js`
+  - Your implementation must be completed as a proper ES6 Class, and exported as a node module
+    - Class Name must be `ProperCase`
+    - Class Methods must be `camelCase`
 
     ```javascript
-    const LinkedList = require('../linked-list.js');
-    const list = new LinkedList();
-    // ...
+    class LinkedList {
+      constructor() {
+        // code
+      }
+
+      methodName() {
+        // code
+      }
+
+    }
+    module.exports = LinkedList;
     ```
 
-- Run your test from the root of the `data-structures-and-algorithms` repository, as follows
-  - Run All Tests: `npm test`
-  - Run All Tests For One Data Structure: `npm test linked-lists`
-  - Run a specific test: `npm test fizzbuzz`
+- Tests
+  - Create folder named `__tests__` and within it, a test file called `[data-structure].test.js`
+    - i.e. `__tests__/linked-list.test.js`
+    - Your tests will then need to require the data structure you're testing
+      - i.e. `const LinkedList = require('../index');
 
-### Continuous Testing
+### Data Structure: Extending an implementation
 
-The repository contains a folder named `.github` which contains a configuration file that will automatically execute all of your tests when you check in your code to GitHub.
+- Work within the data structure implementation
+- Create a new method within the class that solves the code challenge
+  - Remember, you'll have access to `this` within your class methods
+- Tests
+  - You will have folder named `__tests__` and within it, a test file called `[data-structure].test.js`
+    - i.e. `__tests__/linked-list.test.js`
+    - Add to the tests written for this data structure to cover your new method(s)
 
-You can see the results of your tests online in the "Actions" tab of your repository on GitHub
+### Code Challenge / Algorithm
 
-> NOTE: This will be the source of your grades as well.
+Code challenges should be completed within a folder named `code-challenges` under the `javascript` level
+
+- Daily Setup:
+  - Create a new folder under the `javascript` level, with the name of the code challenge
+    - Each code challenge assignment identifies the branch name to use, for example 'find-maximum-value'
+    - For clarity, create your folder with the same name, ensuring that it's `kebab-cased`
+    - i.e. For a challenge named 'find-maximum-value', create the folder:`code-challenges/find-maximum-value`
+  - Code Challenge Implementation
+    - Each code challenge requires a function be written, for example "find maximum value"
+    - Name the actual challenge file with the name of the challenge, in `kebab-case`
+      - i.e. `find-maximum-value.js`
+    - Reminder: Your challenge file will then need to require the data structure you're using to implement
+      - i.e. `const LinkedList = require('../linked-list');
+    - Your challenge function name is up to you, but it's recommended that you use camel case
+      - i.e. `function findMaximumValue(list) { ... }`
+    - Be sure to export your function so that you can write tests
+  - Tests
+    - Create folder named `__tests__` and within it, a test file called `[challenge].test.js`
+      - i.e. `__tests__/find-maximum-value.test.js`
+      - Your test file would require the challenge file found in the directory above, which has your exported function
+        - i.e. `const reverse = require('../find-maximum-value.js');
+
+## Running Tests
+
+If you setup your folders according to the above guidelines, running tests becomes a matter of deciding which tests you want to execute.  Jest does a good job at finding the test files that match what you specify in the test command
+
+From the root of the `data-structures-and-algorithms` folder, execute the following commands:
+
+- **Run every possible test** - `npm test`
+- **Run a test for a data structure - `npm test linked-list`
+- **Run a test for a specific challenge - `npm test reverse-ll`
+
+#### Live Tests
+
+Note that when you check your code into GitHub, all of your tests will automatically execute. These results should match your own, and will be found on the  **Actions** tab
